@@ -1,0 +1,25 @@
+Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+
+Copyright (c) 2026 weirong-ui
+
+本仓库中的笔记内容（cloud-native-notes）采用 CC BY-NC-SA 4.0 许可。
+
+你可以自由地：
+
+- 共享 —— 在任何媒介以任何形式复制、发行本作品
+- 改编 —— 重混、转换、和基于本作品进行创作
+
+惟须遵守下列条件：
+
+- 署名 —— 你必须给出适当的署名（作者：weirong-ui，并给出原文链接），
+          提供指向本许可协议的链接，同时标明是否对原始作品作了修改。
+          可以用任何合理的方式署名，但不得以任何方式暗示许可人认可你或你的使用。
+- 非商业性使用 —— 你不得将本作品用于商业目的。
+- 相同方式共享 —— 如果你重混、转换本作品，或者基于本作品进行创作，
+          你必须基于与原先许可协议相同的许可协议分发你的贡献。
+- 不得增加限制 —— 你不得适用法律术语或者技术措施，
+          从而限制其他人做许可协议允许的事情。
+
+完整协议文本见：https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans
+
+代码中引用的第三方项目（如 Kubernetes、controller-runtime）遵循其各自的许可证。
