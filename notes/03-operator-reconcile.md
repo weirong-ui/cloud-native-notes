@@ -1,6 +1,6 @@
 # 03 · Reconcile 循环：幂等、Finalizer 时序与 status 回写
 
-> 对应掘金：《第一个 Reconcile》｜状态：已发布｜最后更新 2026-11-02
+> 对应掘金：[《从零写一个 K8s Operator：kubebuilder 初始化到第一个 Reconcile》](https://juejin.cn/post/7703105289100951561)｜状态：已发布｜最后更新 2026-11-02
 > 源码：`kubesentry/internal/controller/app_controller.go`（本文行号对应该文件）
 
 ## 一句话
