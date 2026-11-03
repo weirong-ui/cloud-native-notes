@@ -23,7 +23,7 @@
 | 02 | [Service 只是一个抽象：ClusterIP 为什么 ping 不通](notes/02-service-and-kube-proxy.md) | 掘金《Service 与 kube-proxy》 | `ensureService` |
 | 03 | [Reconcile 循环：幂等、Finalizer 时序与 status 回写](notes/03-operator-reconcile.md) | 掘金《第一个 Reconcile》 | `internal/controller` |
 | 04 | [伸缩决策引擎：为什么 HPA 会震荡](notes/04-scaling-decision-engine.md) | 掘金《伸缩决策引擎》 | `internal/scaler` |
-| 05 | [controller-gen 与 CRD 的 8 个坑（血泪版）](notes/05-controller-gen-pitfalls.md) | — | P0 全流程 |
+| 05 | [controller-gen 与 CRD 的 10 个坑（血泪版）](notes/05-controller-gen-pitfalls.md) | — | P0 全流程 |
 
 ### 排查手册（`troubleshooting/`）
 

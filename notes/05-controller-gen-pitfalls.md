@@ -1,4 +1,4 @@
-# 05 · controller-gen 与 CRD 的 8 个坑（血泪版）
+# 05 · controller-gen 与 CRD 的 10 个坑（血泪版）
 
 > 全部来自 2026-11-02 把 kubesentry 从"不能编译"救到"CI 全绿"的实际过程，每条都带真实报错。
 > 状态：持续更新
@@ -187,10 +187,58 @@ COPY go.mod go.sum ./ # 没跑 kubebuilder init 时也不存在
 
 ---
 
+---
+
+## 坑 9：`omitempty` 对结构体不生效 → 省略字段的 CR 在首轮 Reconcile 死循环（2026-11-03）
+
+```go
+type AppSpec struct {
+    // +optional
+    Health HealthPolicy `json:"health,omitempty"` // 错！omitempty 只对空值/指针生效
+}
+```
+
+**症状**：CR 里不写 `spec.health`，`kubectl apply` 能过（CRD 校验只卡用户提交的 YAML），
+但控制器第一轮 `Update`（比如加 finalizer）就被 apiserver 拒：
+
+```
+Unsupported value: "": supported values: "graduated", "observability-only"
+```
+
+**原因**：Go 的 `omitempty` 对**结构体类型不生效**（只对空字符串/0/nil 指针/空集合生效）。
+回写时 `health` 被序列化成 `{"strategy":""}`，空字符串被 CRD 的 enum 校验拒绝。
+样例 CR 恰好写了全字段，所以 P0 的验证完全没暴露——**省略 optional 字段的路径必须单独测**。
+
+**修复**：改指针 `*HealthPolicy`。指针为 nil 时 `omitempty` 真的生效（字段消失）。
+回归测试：`TestAppSpec_OmitsNilPolicies` 锁住序列化行为（nil 策略必须不出现在 JSON 里）。
+
+---
+
+## 坑 10：用静态 Service 地址抓 Prometheus 指标 → counter 非单调，rate() 全是错的（2026-11-03）
+
+```yaml
+# 错：每次抓取被 kube-proxy 随机路由到不同后端 Pod
+scrape_configs:
+  - job_name: demoapp
+    static_configs:
+      - targets: ['scaledemo.demo.svc:8080']
+```
+
+**症状**：loadgen 实际打 500 QPS，Prometheus 的 `rate()` 算出来 150。
+
+**原因**：每个 Pod 各自计数。通过 Service 抓 = 每次 5s 随机看到一个 Pod 的 counter，
+序列忽大忽小非单调，Prometheus 把下降当 counter reset，rate 算出来是垃圾。
+
+**修复**：`kubernetes_sd_configs: role: pod` 按 Pod 逐个抓（记得给 Prometheus 配
+list/watch pods 的 RBAC——RoleBinding 的 `subjects`/`roleRef` 是**顶层字段**，
+别缩进进 metadata，会报 `strict decoding error: unknown field "metadata.subjects"`）。
+
+---
+
 ## 一条总原则
 
-这 8 个坑里有 5 个（坑 1、2、4、6、8）**本地看代码完全看不出来，只有真的 `kubectl apply` / 真的推到 CI 才会炸**。所以：
+这 10 个坑里有一大半（坑 1、2、4、6、8、9、10）**本地看代码完全看不出来，只有真的 `kubectl apply` / 真的推到 CI 才会炸**。所以：
 
 > **Operator 项目的验证必须在真集群上做，不能靠"我觉得应该能跑"。**
 
-代价是多花 15 分钟起个 kind，收益是提前发现一堆会在面试官面前爆炸的问题。
+代价是多花 15 分钟起个 kind（或直接用 Docker Desktop 自带的集群），收益是提前发现一堆会在面试官面前爆炸的问题。
