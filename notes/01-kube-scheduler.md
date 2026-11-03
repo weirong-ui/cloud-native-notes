@@ -83,7 +83,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,CPU:.status.allocatable.
 
 ## 我为项目记的
 
-调度本身和 KubeSentry 暂时没有交集，但**"调度失败"是 P2 自愈要识别的信号之一**：一个 Pod 长时间 `Pending` 且 `reason=Unschedulable`，不应该只是等着，而应该上报——这属于"资源类故障"，和 CrashLoop 的处理路径完全不同（扩容救不了调度失败）。记在这里，P2 时回来取。
+调度本身和 KubeStasis 暂时没有交集，但**"调度失败"是 P2 自愈要识别的信号之一**：一个 Pod 长时间 `Pending` 且 `reason=Unschedulable`，不应该只是等着，而应该上报——这属于"资源类故障"，和 CrashLoop 的处理路径完全不同（扩容救不了调度失败）。记在这里，P2 时回来取。
 
 ## 参考
 

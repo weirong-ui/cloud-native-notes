@@ -123,7 +123,7 @@ kubectl get pods -A --field-selector=status.phase!=Running | grep -v Completed
 kubectl debug -it <pod> --image=busybox:1.36 --target=<container>
 ```
 
-## 和 KubeSentry 的关系
+## 和 KubeStasis 的关系
 
 P2 的自愈引擎要识别的正是这几个信号，读取路径已经确定：
 

@@ -1,7 +1,7 @@
 # cloud-native-notes
 
 > 云原生学习笔记库。**只记"我在项目里真的用到 / 真的踩到"的东西**，不抄文档，不背八股。
-> 主线项目：[weirong-ui/kubesentry](https://github.com/weirong-ui/kubesentry)（K8s Operator：自愈 + 智能弹性伸缩）
+> 主线项目：[weirong-ui/kubestasis](https://github.com/weirong-ui/kubestasis)（K8s Operator：自愈 + 智能弹性伸缩）
 
 每一篇笔记都按同一套格式写：
 

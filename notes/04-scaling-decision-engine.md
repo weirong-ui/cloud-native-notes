@@ -1,7 +1,7 @@
 # 04 · 伸缩决策引擎：为什么 HPA 会震荡
 
 > 对应掘金：《伸缩决策引擎》｜状态：草稿｜最后更新 2026-11-02
-> 源码：`kubesentry/internal/scaler/engine.go`（本文行号对应该文件）
+> 源码：`kubestasis/internal/scaler/engine.go`（本文行号对应该文件）
 
 ## 一句话
 

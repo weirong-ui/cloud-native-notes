@@ -1,6 +1,6 @@
 # 05 · controller-gen 与 CRD 的 10 个坑（血泪版）
 
-> 全部来自 2026-11-02 把 kubesentry 从"不能编译"救到"CI 全绿"的实际过程，每条都带真实报错。
+> 全部来自 2026-11-02 把 kubestasis 从"不能编译"救到"CI 全绿"的实际过程，每条都带真实报错。
 > 状态：持续更新
 
 ---
@@ -182,7 +182,7 @@ COPY go.mod go.sum ./ # 没跑 kubebuilder init 时也不存在
 ## 附：两个非 Go 但同样浪费了我时间的
 
 - **Windows 上 `git clone` 报证书吊销失败** → `git -c http.schannelCheckRevoke=false clone ...` 或 `GIT_SSL_NO_VERIFY=1`。curl 同理加 `--ssl-no-revoke`。
-- **Docker Desktop 集群里同 tag 镜像被 containerd 缓存**：改了代码重新 `docker build -t kubesentry:e2e` 再部署，集群用的还是旧镜像。验证时**换 tag**（`e2e2`、`e2e3`）最省事，别去研究 imagePullPolicy。
+- **Docker Desktop 集群里同 tag 镜像被 containerd 缓存**：改了代码重新 `docker build -t kubestasis:e2e` 再部署，集群用的还是旧镜像。验证时**换 tag**（`e2e2`、`e2e3`）最省事，别去研究 imagePullPolicy。
 - **Windows 没装 `make`**：Makefile 本身没问题，只是本地跑不了。要么用等价的底层命令，要么装一个 GNU make。
 
 ---

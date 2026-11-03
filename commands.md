@@ -16,7 +16,7 @@ kubectl logs <p> --previous              # 上一次崩溃的日志（CrashLoop 
 kubectl get pods -A --field-selector=status.phase!=Running | grep -v Completed
 kubectl get events --sort-by=.lastTimestamp | tail -30
 kubectl get events --field-selector reason=FailedScheduling
-kubectl get deploy,svc -l app.kubernetes.io/managed-by=kubesentry
+kubectl get deploy,svc -l app.kubernetes.io/managed-by=kubestasis
 ```
 
 ## jsonpath 取字段（写脚本时比 -o yaml 干净）

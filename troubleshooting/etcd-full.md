@@ -121,4 +121,4 @@ etcdctl ... get "" --prefix --keys-only | awk -F/ '{print $2"/"$3}' | sort | uni
 
 ## 我的备注
 
-这条笔记目前和 KubeSentry 没有直接关系，我记它是因为：Operator 本身就是 etcd 的重度写入方（每轮 Reconcile 的 status patch 都会产生新 revision）。**如果将来 KubeSentry 定义的 CR 数量上千，它就是 etcd 空间问题的贡献者之一。** 到时候回来看第 2 步。
+这条笔记目前和 KubeStasis 没有直接关系，我记它是因为：Operator 本身就是 etcd 的重度写入方（每轮 Reconcile 的 status patch 都会产生新 revision）。**如果将来 KubeStasis 定义的 CR 数量上千，它就是 etcd 空间问题的贡献者之一。** 到时候回来看第 2 步。

@@ -20,7 +20,7 @@ iptables/IPVS 规则（每个节点一份）
 
 > **selector 写错 → Endpoints 为空 → Service 一定不通**，且 Service 本身不会报任何错。
 
-这是我在 KubeSentry 里真实踩到的：Service 的 `spec.selector` 必须和 Deployment 的 `spec.template.metadata.labels` **完全一致**，一个字母之差就没有后端，而 `kubectl get svc` 看起来完全正常。
+这是我在 KubeStasis 里真实踩到的：Service 的 `spec.selector` 必须和 Deployment 的 `spec.template.metadata.labels` **完全一致**，一个字母之差就没有后端，而 `kubectl get svc` 看起来完全正常。
 
 源码位置（`internal/controller/app_controller.go:224`）：
 
@@ -103,7 +103,7 @@ kubectl run dns --rm -it --image=busybox:1.36 --restart=Never -- nslookup <svc>.
 
 ## 我为项目记的
 
-KubeSentry 的 `ensureService` 只做 ClusterIP + 单端口映射，`spec.type` 只在创建时设置一次（`app_controller.go:221`）——否则每轮 Reconcile 都会把用户手动改成 NodePort 的字段覆盖回去。这是 Operator 的通用原则：**mutate 函数里只写你负责的字段，用户可能改的字段要么不动，要么只在创建时设一次。**
+KubeStasis 的 `ensureService` 只做 ClusterIP + 单端口映射，`spec.type` 只在创建时设置一次（`app_controller.go:221`）——否则每轮 Reconcile 都会把用户手动改成 NodePort 的字段覆盖回去。这是 Operator 的通用原则：**mutate 函数里只写你负责的字段，用户可能改的字段要么不动，要么只在创建时设一次。**
 
 ## 参考
 
