@@ -1,6 +1,6 @@
 # 02 · Service 只是一个抽象：ClusterIP 为什么 ping 不通
 
-> 对应掘金：《Service 与 kube-proxy》｜状态：已发布｜最后更新 2026-11-02
+> 对应掘金：[《K8s Service 与 kube-proxy 深度笔记：四种模式与流量转发原理》](https://juejin.cn/post/7703428711233241131)｜状态：已发布｜最后更新 2026-11-02
 
 ## 一句话
 
